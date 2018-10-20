@@ -3,6 +3,7 @@ package com.example.candradinatha.matchschedule.view.detail
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
+import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import com.example.candradinatha.matchschedule.R
@@ -38,6 +39,8 @@ class DetailActivity : AppCompatActivity(), MatchDetailView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        supportActionBar?.title = "Match Detail"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val intent = intent
         idEvent = intent.getStringExtra("id")
@@ -91,6 +94,15 @@ class DetailActivity : AppCompatActivity(), MatchDetailView {
         tv_away_sub.text = matchDetail.get(0).awaySubstitute
 
         hideLoading()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return if (item?.itemId == android.R.id.home) {
+            finish()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
     }
 
 }
